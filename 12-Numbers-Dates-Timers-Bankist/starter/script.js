@@ -155,6 +155,41 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+// working with timers
+
+const startLogOutTimer = function () {
+  // Set time to five minutes
+  let time = 20;
+
+  // call timer every second
+
+  const timer = setInterval(function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = time % 60;
+    // In each call print remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+    // Decrease one second
+    time--;
+    // when 0 seconds stop timer and log out user
+
+    if (time === 0) {
+      clearInterval(timer);
+
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+  }, 1000);
+};
+
+console.log(startLogOutTimer());
+
+// FAKE ALWAYS LOGGED IN
+
+// currentAccount = account1;
+// updateUI(currentAccount);
+
+const now = new Date();
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -212,6 +247,7 @@ btnLoan.addEventListener('click', function (e) {
     // Add movement
     currentAccount.movements.push(amount);
 
+    startLogOutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -251,3 +287,52 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+// Dates and times in JavaScript
+
+// const now = new Date();
+// console.log(now);
+
+// console.log(new Date('Aug 02 2020 18:05:41'));
+// console.log(new Date('December 24,2015'));
+
+// console.log(new Date(account1.movementsDates[0]));
+
+// console.log(new Date(2037, 10, 19, 15, 23, 5));
+
+// console.log(new Date(0));
+
+// console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Working with dates
+// Working with dates
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth()); // zero based!
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+
+future.setFullYear(2040);
+console.log(future);
+
+// Timers: setTimeout and setInterval
+// Timers: setTimeout and setInterval
+
+const ingredients = ['olives', 'spinach'];
+
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`here is your pizza with ${ing1} and ${ing2}`),
+  300,
+  ...ingredients
+);
+
+console.log('Waiting.....');
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
