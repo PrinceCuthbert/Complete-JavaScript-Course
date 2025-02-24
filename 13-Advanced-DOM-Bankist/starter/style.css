@@ -169,6 +169,10 @@ img {
   background-color: var(--color-primary-darker);
   color: #333;
 }
+.nav__link,
+.nav img {
+  transition: opacity 1s ease-in-out;
+}
 
 /* HEADER */
 .header {

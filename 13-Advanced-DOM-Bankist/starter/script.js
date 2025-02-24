@@ -4,13 +4,13 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-
-// Scroll effects
-// Scroll effects
-// Scroll effects
-
+const nav = document.querySelector('.nav');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+
+// Scroll effects
+// Scroll effects
+// Scroll effects
 
 btnScrollTo.addEventListener('click', function () {
   // const s1coords = section1.getBoundingClientRect();
@@ -286,26 +286,77 @@ const randomColor = () =>
 
 console.log(randomColor(0, 255));
 
-document
-  .querySelector('.nav__link')
-  .addEventListener('mouseover', function (e) {
-    // this.style.backgroundColor = randomColor();
-    this.style.opacity = 0.7;
-    // console.log('LINK', e.target, e.currentTarget);
-    // console.log(e.currentTarget === this);
-    // Stop event propagation
-    e.stopPropagation();
-  });
+// Menu fade animation
+// Menu fade animation
 
-document.querySelectorAll('.nav__link').forEach(link => {
-  link.addEventListener('mouseover', function () {
-    this.style.opacity = 0.7;
-  });
+// mouseover: it bubbles but mouseenter doesn't bubble
 
-  link.addEventListener('mouseout', function () {
-    this.style.opacity = 1;
+const handleHover = function (e, opacity) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+
+nav.addEventListener('mouseover', handleHover.bind(this, 0.5));
+nav.addEventListener('mouseout', function (e) {
+  handleHover(e, 1);
+  nav.addEventListener('mouseout', function () {
+    nav.style.transition = 'all 1s';
   });
 });
+// nav.addEventListener('mouseover', function (e) {
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target;
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = 0.5;
+//     });
+//     logo.style.opacity = 0.5;
+//   }
+// });
+
+// nav.addEventListener('mouseout', function (e) {
+//   if (e.target.classList.contains('nav__link')) {
+//     const link = e.target;
+//     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+//     const logo = link.closest('.nav').querySelector('img');
+
+//     siblings.forEach(el => {
+//       if (el !== link) el.style.opacity = 1;
+//     });
+//     logo.style.opacity = 1;
+//   }
+// });
+
+// document
+//   .querySelector('.nav__link')
+//   .addEventListener('mouseover', function (e) {
+//     // this.style.backgroundColor = randomColor();
+//     this.style.opacity = 0.7;
+//     // console.log('LINK', e.target, e.currentTarget);
+//     // console.log(e.currentTarget === this);
+//     // Stop event propagation
+//     e.stopPropagation();
+//   });
+
+// document.querySelectorAll('.nav__link').forEach(link => {
+//   link.addEventListener('mouseover', function () {
+//     this.style.opacity = 0.7;
+//   });
+
+//   link.addEventListener('mouseout', function () {
+//     this.style.opacity = 1;
+//   });
+// });
 
 console.log(h1.querySelectorAll('.highlight'));
 
