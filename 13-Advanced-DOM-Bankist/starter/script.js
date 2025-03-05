@@ -7,6 +7,7 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const nav = document.querySelector('.nav');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const subHeader = document.querySelector('.header__subline');
 
 // Scroll effects
 // Scroll effects
@@ -39,6 +40,10 @@ btnScrollTo.addEventListener('click', function () {
 
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+btnScrollTo.style.fontSize = '3rem';
+btnScrollTo.style.fontFamily = 'Poppins,sans-serif';
+subHeader.style.fontSize = '2.8rem';
 
 // Page navigation
 // Page navigation
@@ -260,7 +265,7 @@ const alertH1 = function (e) {
   h1.removeEventListener('mouseenter', alertH1);
 };
 
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
 // setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
@@ -291,7 +296,7 @@ console.log(randomColor(0, 255));
 
 // mouseover: it bubbles but mouseenter doesn't bubble
 
-const handleHover = function (e, opacity) {
+const handleHover = function (opacity, e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
@@ -304,13 +309,12 @@ const handleHover = function (e, opacity) {
   }
 };
 
-nav.addEventListener('mouseover', handleHover.bind(this, 0.5));
-nav.addEventListener('mouseout', function (e) {
-  handleHover(e, 1);
-  nav.addEventListener('mouseout', function () {
-    nav.style.transition = 'all 1s';
-  });
+nav.addEventListener('mouseover', handleHover.bind(null, 0.5));
+nav.addEventListener('mouseout', handleHover.bind(null, 1));
+nav.addEventListener('mouseout', function () {
+  nav.style.transition = 'all 1s';
 });
+
 // nav.addEventListener('mouseover', function (e) {
 //   if (e.target.classList.contains('nav__link')) {
 //     const link = e.target;
@@ -358,26 +362,26 @@ nav.addEventListener('mouseout', function (e) {
 //   });
 // });
 
-console.log(h1.querySelectorAll('.highlight'));
+// console.log(h1.querySelectorAll('.highlight'));
 
-console.log(h1.childNodes);
-console.log(h1.children);
+// console.log(h1.childNodes);
+// console.log(h1.children);
 
 // h1.firstElementChild.style.color = 'white';
 // h1.lastElementChild.style.color = 'orangered';
 
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
 // h1.closest('.header').style.background = 'var(--gradient-secondary)';
 // h1.closest('h1').style.background = 'var(--gradient-primary)';
 // Going sideways: selecting sibling elements
 // Going sideways: selecting sibling elements
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
 
-console.log(h1.parentElement.children);
+// console.log(h1.parentElement.children);
 [...h1.parentElement.children].forEach(function (el) {
   if (el !== h1) el.style.transform = 'scale(0.5)';
 });
@@ -419,4 +423,132 @@ tabsContainer.addEventListener('click', function (e) {
   document
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
+});
+
+// Sticky navigation
+// Sticky navigation
+// Sticky navigation
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const obsOptions = {
+//   // Viewport=root is the element that we want our target element to intersect with
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+
+// observer.observe(section1);
+
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
+
+// Reveal sections
+// Reveal sections
+const allPageSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  // console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allPageSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  // section.classList.add('section--hidden');
+});
+
+// Lazy loading images
+// Lazy loading images
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  // Replace src with data-src
+
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
+
+// Slider
+// Slider
+// Slider
+
+const slides = document.querySelectorAll('.slide');
+// const slider = document.querySelector('.slider');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let CurSlide = 0;
+const maxSlide = slides.length;
+
+// slider.style.transform = 'scale(0.4) translateX(-1200px)';
+// slider.style.overflow = 'visible';
+
+slides.forEach((s, i) => {
+  s.style.transform = `translateX(${100 * i}%)`;
+});
+
+// Next slide
+btnRight.addEventListener('click', function () {
+  if (CurSlide === maxSlide - 1) {
+    CurSlide = 0;
+  } else {
+    CurSlide++;
+  }
+
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${100 * (i - CurSlide)}%)`;
+  });
+});
+
+btnLeft.addEventListener('click', function () {
+  if (CurSlide === 0) {
+    CurSlide = maxSlide - 1;
+  } else {
+    CurSlide--;
+  }
 });
