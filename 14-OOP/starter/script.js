@@ -231,3 +231,70 @@ console.log(arr);
 
 arr.pop(12);
 console.log(arr);
+
+// Library System
+// Library System
+// Library System
+
+const Book = function (title, author) {
+  this.title = title;
+  this.author = author;
+};
+
+Book.prototype.borrow = function () {
+  console.log(this.title + 'is temporary in rent.');
+};
+
+Book.prototype.returned = function () {
+  if (!this.borrowed) {
+    console.log(`${this.title} has been returned`);
+  } else {
+    console.log(`this.title + 'is temporary in rent.'`);
+  }
+};
+
+const giancoli = new Book('Giancoli', 'Physics,Giancoli');
+
+giancoli.borrow();
+giancoli.returned();
+
+const BankAccount = function (owner, balance) {
+  this.owner = owner;
+  this.balance = balance;
+};
+
+BankAccount.prototype.deposit = function (amount) {
+  this.balance = this.balance + amount;
+  console.log(
+    `${this.owner} deposited ${amount} and the new balance is ${this.balance}`
+  );
+};
+
+BankAccount.prototype.withdrawal = function (amount) {
+  if (amount > this.balance) {
+    console.log(`Insufficient Balance`);
+  } else {
+    console.log(
+      `You withdrew ${amount}, and the balance is ${this.balance - amount}`
+    );
+  }
+};
+
+const user1 = new BankAccount('Cuthbert Prince', 1000000);
+console.log(user1);
+
+user1.deposit(600000);
+
+console.log(user1);
+
+user1.withdrawal(700000);
+
+// const element1 = document.createElement('p');
+// element1.innerHTML = user1.balance;
+
+// element1.style.fontSize = '80px';
+// element1.style.display = 'flex';
+// element1.style.flexDirection = 'row';
+// element1.style.justifyContent = 'left';
+
+// document.body.appendChild(element1);
