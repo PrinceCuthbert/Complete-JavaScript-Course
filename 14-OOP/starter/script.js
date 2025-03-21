@@ -399,8 +399,8 @@ mercedes.brake();
 // Class declaration: for some leasons Jonas prefer this
 
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
@@ -410,20 +410,41 @@ class PersonCl {
   }
 
   greet() {
-    console.log(`Hey ${this.firstName}`);
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+  // Static method
+  static hey() {
+    console.log(`✌️ Hey there`);
   }
 }
 
-const jessica = new PersonCl('Jessica', 1996);
-console.log(jessica);
-console.log(jessica.calcAge(2000));
-console.log(jessica.calcAge(2000));
+const walter = new PersonCl('Walter White', 1890);
+
+const jessica = new PersonCl('Jessica Davids', 1996);
+console.log(walter);
+// console.log(jessica.calcAge(2000));
+// console.log(jessica.age);
+// console.log(jessica.calcAge(2000));
 
 // PersonCl.prototype.greet = function name() {
 //   console.log(`Hey ${this.firstName}`);
 // };
 
-jessica.greet();
+// jessica.greet();
 
 // document.querySelector('h1').innerHTML = `${jessica.calcAge(2000)}`;
 
@@ -438,4 +459,118 @@ jessica.greet();
 // N:B
 
 // 1.Classes are not hoisted
-//2.Classes are first-class citizens(we can pass them inot functions and retuurn them from functions)
+// 2.Classes are first-class citizens(we can pass them inot functions and retuurn them from functions)
+// 3.Classes are executed in strict mode even if you haven't initialized it
+
+const booking = class booking {
+  constructor(name, author) {
+    this.name = name;
+    this.author = author;
+  }
+
+  borrowing() {
+    return `${this.name} by ${this.author} is borrowed`;
+  }
+};
+
+const Gcv = new booking('Great Controversy', 'EGW');
+
+console.log(Gcv.borrowing());
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+// 1. Use a constructor function to implement a Car. A car has a make and a speed property. The speed property is the current speed of the car in km/h;
+// 2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new speed to the console;
+// 3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+// 4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+// DATA CAR 1: 'BMW' going at 120 km/h
+// DATA CAR 2: 'Mercedes' going at 95 km/h
+
+// Using Classes not prototype inheritance
+
+const Vehicle = class Vehicle {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    return `${this.make} going at ${this.speed} km/h`;
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} going at ${this.speed} km/h`);
+  }
+};
+
+const Rav4 = new Vehicle('Rav4', 100);
+
+// const element = document.createElement('p'); // You can use 'div', 'span', etc., instead of 'p'
+
+// // Set the content of the element to the result of Rav4.accelerate()
+// element.textContent = Rav4.accelerate();
+
+// // Style the element
+// element.style.display = 'flex';
+// element.style.position = 'relative';
+// element.style.float = 'right';
+// element.style.left = '-600px';
+// element.style.top = '-500px';
+// element.style.alignItems = 'left';
+// element.style.flexDirection = 'column';
+// element.style.color = 'blue'; // Set text color
+// element.style.fontSize = '20px'; // Set font size
+// element.style.fontWeight = 'bold'; // Set font weight
+// element.style.margin = '20px'; // Add margin
+// element.style.textAlign = 'center'; // Center the text
+// element.style.backgroundColor = 'gray'; // Set background color
+// element.style.padding = '10px'; // Add padding
+// element.style.borderRadius = '5px'; // Add rounded cornersent
+
+// // Add hover effect using JavaScript
+// element.addEventListener('mouseover', () => {
+//   element.style.color = 'white';
+//   element.style.backgroundColor = 'black';
+//   element.style.transform = 'scale(1.1)'; // Slightly enlarge on hover
+// });
+
+// element.addEventListener('mouseout', () => {
+//   element.style.color = 'blue';
+//   element.style.backgroundColor = 'gray';
+//   element.style.transform = 'scale(1)'; // Reset size
+// });
+
+// // Append the element to the body
+// document.querySelector('body').appendChild(element);
+
+// Rav4.brake();
+// document.querySelector('body').appendChild = Rav4.accelerate();
+
+const account = {
+  owner: 'jonas',
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
+
+Person.hey = function () {
+  console.log(`Hey there✌️`);
+  console.log(this);
+};
+
+// Person.hey();
+PersonCl.hey();
