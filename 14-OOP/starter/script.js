@@ -1,5 +1,7 @@
 'use strict';
 
+// Removed the unused commented-out line
+
 // let employee = {
 //   baseSalary: 30000,
 //   overtime: 10,
@@ -222,15 +224,15 @@ console.log(jonas.__proto__.__proto__);
 console.log(Person.prototype.constructor);
 console.dir(Person.prototype.constructor);
 
-const arr = [2, 4, 6, 8, 2, 4, 9, 2, 5];
-console.log(arr.__proto__);
-console.log(arr);
+// const arr = [2, 4, 6, 8, 2, 4, 9, 2, 5];
+// console.log(arr.__proto__);
+// console.log(arr);
 
-console.log(arr.push(-1));
-console.log(arr);
+// console.log(arr.push(-1));
+// console.log(arr);
 
-arr.pop(12);
-console.log(arr);
+// arr.pop(12);
+// console.log(arr);
 
 // Library System
 // Library System
@@ -298,3 +300,142 @@ user1.withdrawal(700000);
 // element1.style.justifyContent = 'left';
 
 // document.body.appendChild(element1);
+
+// const arr = [3, 6, 6, 9, 6, 9, 3];
+// const words = ['spray', 'limit', 'elite', 'present'];
+// const result = words.filter(words => words.length > 6);
+// console.log(result);
+
+// const bigger = arr.filter(num => num > 5);
+// console.log(bigger);
+
+// // arr.push(1, 2, 4);
+// console.log(arr);
+
+// console.log(arr.__proto__);
+// console.log(arr.__proto__ === Array.prototype);
+
+// console.log(arr.__proto__.__proto__);
+
+// Array.prototype.unique = function () {
+//   return [...new Set(this)];
+// };
+
+// console.log(arr.unique());
+
+// const h1 = document.querySelector('h1');
+// console.dir(h1);
+
+// const obj = {
+//   name: 'Alice',
+//   age: 25,
+//   greet: function () {
+//     console.log('Hello!');
+//   },
+// };
+
+// console.dir(obj);
+
+// console.dir(x => x + 1);
+
+// const People = function (name, age) {
+//   this.name = name;
+//   this.age = age;
+
+//   this.greet = () => {
+//     console.log(
+//       `Hello, my name is ${this.name}, and I'm ${this.age} years old`
+//     );
+//   };
+// };
+
+// const alice = new People('Alice', 25);
+// alice.greet();
+
+// const bob = new People('Bob', 30);
+// bob.greet();
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+// 1. Use a constructor function to implement a Car. A car has a make and a speed property. The speed property is the current speed of the car in km/h;
+// 2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new speed to the console;
+// 3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+// 4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+// DATA CAR 1: 'BMW' going at 120 km/h
+// DATA CAR 2: 'Mercedes' going at 95 km/h
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(this.make + ' ' + 'going at' + ' ' + this.speed + 'km/h');
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(this.make + ' ' + 'going at' + ' ' + this.speed + 'km/h');
+};
+
+const bmw = new Car('BMW', 100);
+const mercedes = new Car('Mercedes', 80);
+
+bmw.accelerate();
+bmw.accelerate();
+bmw.accelerate();
+bmw.brake();
+
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.brake();
+
+// class expression
+// const PersonCl = class {}
+
+// Class declaration: for some leasons Jonas prefer this
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Method will be added to prototype property
+  calcAge() {
+    return 2037 - this.birthYear;
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+console.log(jessica.calcAge(2000));
+console.log(jessica.calcAge(2000));
+
+// PersonCl.prototype.greet = function name() {
+//   console.log(`Hey ${this.firstName}`);
+// };
+
+jessica.greet();
+
+// document.querySelector('h1').innerHTML = `${jessica.calcAge(2000)}`;
+
+//---------- Functions are hoisted unlike classes(you can access them even before initialization)
+// great('Bob');
+
+// function great(name) {
+//   console.log(`Hey, ${name} are you feeling great!`);
+// }
+
+// N:B
+// N:B
+
+// 1.Classes are not hoisted
+//2.Classes are first-class citizens(we can pass them inot functions and retuurn them from functions)
