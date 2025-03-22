@@ -145,84 +145,84 @@
 // john.calcAge(); // 47 (assuming 2037 as the year)
 // jane.sayGoodbye(); // Jane says goodbye!
 
-const Person = function (name, birthYear) {
-  this.name = name;
-  this.birthYear = birthYear;
-};
+// const Person = function (name, birthYear) {
+//   this.name = name;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
 
-Person.prototype.greet = function () {
-  console.log(`Hello` + ' ' + this.name);
-};
+// Person.prototype.greet = function () {
+//   console.log(`Hello` + ' ' + this.name);
+// };
 
-const jonas = new Person('Jonas', 1998);
-const matilda = new Person('Matilda', 1970);
-console.log(jonas);
-console.log(matilda);
+// const jonas = new Person('Jonas', 1998);
+// const matilda = new Person('Matilda', 1970);
+// console.log(jonas);
+// console.log(matilda);
 
-jonas.calcAge();
+// jonas.calcAge();
 
-jonas.greet();
+// jonas.greet();
 
-const Student = function (name, year, grade) {
-  this.name = name;
-  this.year = year;
-  this.grade = grade;
-};
+// const Student = function (name, year, grade) {
+//   this.name = name;
+//   this.year = year;
+//   this.grade = grade;
+// };
 
-Student.prototype.attendance = function () {
-  console.log(this.name + ' ' + ', present!');
-};
-Student.prototype.yearOfStudy = function () {
-  console.log('A' + ' ' + 'year' + ' ' + this.year + ' ' + 'student');
-};
+// Student.prototype.attendance = function () {
+//   console.log(this.name + ' ' + ', present!');
+// };
+// Student.prototype.yearOfStudy = function () {
+//   console.log('A' + ' ' + 'year' + ' ' + this.year + ' ' + 'student');
+// };
 
-Student.prototype.distinction = function () {
-  console.log('In' + ' ' + this.grade + ' ' + 'distinction');
-};
+// Student.prototype.distinction = function () {
+//   console.log('In' + ' ' + this.grade + ' ' + 'distinction');
+// };
 
-const cuthbert = new Student('Cuthbert', 2, '1st');
+// const cuthbert = new Student('Cuthbert', 2, '1st');
 
-cuthbert.attendance();
-cuthbert.yearOfStudy();
-cuthbert.distinction();
+// cuthbert.attendance();
+// cuthbert.yearOfStudy();
+// cuthbert.distinction();
 
-console.log(Student.prototype.isPrototypeOf(cuthbert));
+// console.log(Student.prototype.isPrototypeOf(cuthbert));
 
-console.log(Student.prototype.isPrototypeOf(Student));
+// console.log(Student.prototype.isPrototypeOf(Student));
 
-Person.prototype.species = 'Home Sapiens';
+// Person.prototype.species = 'Home Sapiens';
 
-console.log(jonas, matilda);
-console.log(jonas.species, matilda.species);
+// console.log(jonas, matilda);
+// console.log(jonas.species, matilda.species);
 
-console.log(jonas.hasOwnProperty('name'));
-console.log(jonas.hasOwnProperty('species'));
+// console.log(jonas.hasOwnProperty('name'));
+// console.log(jonas.hasOwnProperty('species'));
 
-Student.prototype.checkDistinction = function () {
-  if (this.grade === '1st') {
-    console.log('In' + ' ' + '1st' + ' ' + 'distinction');
-  } else {
-    console.log('Not in' + ' ' + '1st' + ' ' + 'distinction');
-  }
-};
+// Student.prototype.checkDistinction = function () {
+//   if (this.grade === '1st') {
+//     console.log('In' + ' ' + '1st' + ' ' + 'distinction');
+//   } else {
+//     console.log('Not in' + ' ' + '1st' + ' ' + 'distinction');
+//   }
+// };
 
-cuthbert.checkDistinction('1st');
+// cuthbert.checkDistinction('1st');
 
-console.log(jonas.hasOwnProperty('name'));
-console.log(jonas.hasOwnProperty('species'));
+// console.log(jonas.hasOwnProperty('name'));
+// console.log(jonas.hasOwnProperty('species'));
 
-console.log(jonas.__proto__);
-// Object.prototype(Top of prototype chain)
-console.log(jonas.__proto__.__proto__);
+// console.log(jonas.__proto__);
+// // Object.prototype(Top of prototype chain)
+// console.log(jonas.__proto__.__proto__);
 
-// console.log(jonas.__proto__.__proto__.__proto__);
+// // console.log(jonas.__proto__.__proto__.__proto__);
 
-console.log(Person.prototype.constructor);
-console.dir(Person.prototype.constructor);
+// console.log(Person.prototype.constructor);
+// console.dir(Person.prototype.constructor);
 
 // const arr = [2, 4, 6, 8, 2, 4, 9, 2, 5];
 // console.log(arr.__proto__);
@@ -567,10 +567,117 @@ console.log(account.latest);
 account.latest = 50;
 console.log(account.movements);
 
-Person.hey = function () {
-  console.log(`Hey there✌️`);
-  console.log(this);
-};
+// Person.hey = function () {
+//   console.log(`Hey there✌️`);
+//   console.log(this);
+// };
 
 // Person.hey();
-PersonCl.hey();
+// PersonCl.hey();
+// console.log(account.latest);
+// PersonCl.hey();
+// console.log('This is a new log message!');
+
+// Object.create way of implementing prototype inheritance
+// Object.create way of implementing prototype inheritance
+// Object.create way of implementing prototype inheritance
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__);
+
+const sarah = Object.create(PersonProto);
+console.log(sarah);
+
+sarah.init('Sarah', 1979);
+sarah.calcAge();
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+// 1. Re-create challenge 1, but this time using an ES6 class;
+// 2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6);
+// 3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, by multiplying the input by 1.6);
+// 4. Create a new car and experiment with the accelerate and brake methods, and with the getter and setter.
+
+// DATA CAR 1: 'Ford' going at 120 km/h
+
+// GOOD LUCK 😀
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+  get SpeedUS() {
+    return this.speed / 1.6;
+  }
+  set SpeedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const ford = new CarCl('Ford', 120);
+
+ford.accelerate();
+ford.accelerate();
+ford.brake();
+console.log(ford.SpeedUS);
+
+ford.SpeedUS = 68.73;
+console.log(ford.speed);
+
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  // this.firstName = firstName;
+  // this.birthYear = birthYear;
+
+  // Instead let's inherite from person
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+
+  const introduce = function () {
+    console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+  };
+};
+
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+// };
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+console.log(mike);
+
+mike.introduce();
