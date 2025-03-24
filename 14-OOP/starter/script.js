@@ -1,5 +1,7 @@
 'use strict';
 
+// const { configs } = require('eslint-plugin-react');
+
 // Removed the unused commented-out line
 
 // let employee = {
@@ -234,63 +236,6 @@
 // arr.pop(12);
 // console.log(arr);
 
-// Library System
-// Library System
-// Library System
-
-const Book = function (title, author) {
-  this.title = title;
-  this.author = author;
-};
-
-Book.prototype.borrow = function () {
-  console.log(this.title + 'is temporary in rent.');
-};
-
-Book.prototype.returned = function () {
-  if (!this.borrowed) {
-    console.log(`${this.title} has been returned`);
-  } else {
-    console.log(`this.title + 'is temporary in rent.'`);
-  }
-};
-
-const giancoli = new Book('Giancoli', 'Physics,Giancoli');
-
-giancoli.borrow();
-giancoli.returned();
-
-const BankAccount = function (owner, balance) {
-  this.owner = owner;
-  this.balance = balance;
-};
-
-BankAccount.prototype.deposit = function (amount) {
-  this.balance = this.balance + amount;
-  console.log(
-    `${this.owner} deposited ${amount} and the new balance is ${this.balance}`
-  );
-};
-
-BankAccount.prototype.withdrawal = function (amount) {
-  if (amount > this.balance) {
-    console.log(`Insufficient Balance`);
-  } else {
-    console.log(
-      `You withdrew ${amount}, and the balance is ${this.balance - amount}`
-    );
-  }
-};
-
-const user1 = new BankAccount('Cuthbert Prince', 1000000);
-console.log(user1);
-
-user1.deposit(600000);
-
-console.log(user1);
-
-user1.withdrawal(700000);
-
 // const element1 = document.createElement('p');
 // element1.innerHTML = user1.balance;
 
@@ -393,49 +338,49 @@ mercedes.accelerate();
 mercedes.accelerate();
 mercedes.brake();
 
-// class expression
-// const PersonCl = class {}
+// // class expression
+// // const PersonCl = class {}
 
-// Class declaration: for some leasons Jonas prefer this
+// // Class declaration: for some leasons Jonas prefer this
 
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
 
-  // Method will be added to prototype property
-  calcAge() {
-    return 2037 - this.birthYear;
-  }
+//   // Method will be added to prototype property
+//   calcAge() {
+//     return 2037 - this.birthYear;
+//   }
 
-  greet() {
-    console.log(`Hey ${this.fullName}`);
-  }
+//   greet() {
+//     console.log(`Hey ${this.fullName}`);
+//   }
 
-  get age() {
-    return 2037 - this.birthYear;
-  }
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
 
-  set fullName(name) {
-    console.log(name);
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name!`);
-  }
+//   set fullName(name) {
+//     console.log(name);
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert(`${name} is not a full name!`);
+//   }
 
-  get fullName() {
-    return this._fullName;
-  }
-  // Static method
-  static hey() {
-    console.log(`✌️ Hey there`);
-  }
-}
+//   get fullName() {
+//     return this._fullName;
+//   }
+//   // Static method
+//   static hey() {
+//     console.log(`✌️ Hey there`);
+//   }
+// }
 
-const walter = new PersonCl('Walter White', 1890);
+// const walter = new PersonCl('Walter White', 1890);
 
-const jessica = new PersonCl('Jessica Davids', 1996);
-console.log(walter);
+// const jessica = new PersonCl('Jessica Davids', 1996);
+// console.log(walter);
 // console.log(jessica.calcAge(2000));
 // console.log(jessica.age);
 // console.log(jessica.calcAge(2000));
@@ -582,29 +527,29 @@ console.log(account.movements);
 // Object.create way of implementing prototype inheritance
 // Object.create way of implementing prototype inheritance
 
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
 
-const steven = Object.create(PersonProto);
-console.log(steven);
-steven.name = 'Steven';
-steven.birthYear = 2002;
-steven.calcAge();
+// const steven = Object.create(PersonProto);
+// console.log(steven);
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
+// steven.calcAge();
 
-console.log(steven.__proto__);
+// console.log(steven.__proto__);
 
-const sarah = Object.create(PersonProto);
-console.log(sarah);
+// const sarah = Object.create(PersonProto);
+// console.log(sarah);
 
-sarah.init('Sarah', 1979);
-sarah.calcAge();
+// sarah.init('Sarah', 1979);
+// sarah.calcAge();
 
 ///////////////////////////////////////
 // Coding Challenge #2
@@ -651,33 +596,434 @@ console.log(ford.SpeedUS);
 ford.SpeedUS = 68.73;
 console.log(ford.speed);
 
+// Object.create
+// Object.create
+// Object.create
+
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
+
+// const Student = function (firstName, birthYear, course) {
+//   // this.firstName = firstName;
+//   // this.birthYear = birthYear;
+
+//   // Instead let's inherite from person
+//   Person.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+
+// // Linking prototypes
+// Student.prototype = Object.create(Person.prototype);
+
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+// };
+
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// console.log(mike);
+
+// mike.introduce();
+// mike.calcAge();
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+  greeting() {
+    console.log(`Hello, I'm ${this.name}.`);
+  },
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+// creating an object fom that PersonProto
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.birthYear = 2017;
+steven.name = 'Steven';
+steven.calcAge(2017);
+steven.greeting();
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+
+sarah.init('Sarah', 1979);
+sarah.calcAge();
+
+// Inheritance
+// Inheritance
+// Inheritance
+
 const Person = function (firstName, birthYear) {
   this.firstName = firstName;
   this.birthYear = birthYear;
 };
 
 Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
+  return 2037 - this.birthYear;
 };
 
 const Student = function (firstName, birthYear, course) {
   // this.firstName = firstName;
   // this.birthYear = birthYear;
-
-  // Instead let's inherite from person
   Person.call(this, firstName, birthYear);
   this.course = course;
-
-  const introduce = function () {
-    console.log(`My name is ${this.firstName} and I study ${this.course}.`);
-  };
 };
 
-// Student.prototype.introduce = function () {
-//   console.log(`My name is ${this.firstName} and I study ${this.course}.`);
-// };
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
 
-const mike = new Student('Mike', 2020, 'Computer Science');
+const mike = new Student('Mike', 2020, 'Computer science');
 console.log(mike);
 
 mike.introduce();
+
+// Worker class inherting from Person
+// Worker class inherting from Person
+// Worker class inherting from Person
+
+const Worker = function (firstName, birthYear, id, department) {
+  Person.call(this, firstName, birthYear),
+    (this.id = id),
+    (this.department = department);
+};
+
+// Set up prototype inheritance
+Worker.prototype = Object.create(Person.prototype);
+
+// Move calcAge method to Worker.prototype
+Worker.prototype.calcAge = function () {
+  return 2037 - this.birthYear;
+};
+
+Worker.prototype.introduction = function () {
+  console.log(
+    `I'm ${this.firstName} and I was born in ${
+      this.birthYear
+    }, and I'm ${this.calcAge()} years old. My id is ${
+      this.id
+    } and I'm registerd in ${this.department} department`
+  );
+};
+const worker1 = new Worker('Cuthbert', 2004, 27089, 'Software developer');
+
+console.log(worker1);
+
+worker1.introduction();
+
+// Teacher's class inherting from person
+// Teacher's class inherting from person
+const Teacher = function (firstName, birthYear, ssn, course, school) {
+  Person.call(this, firstName, birthYear);
+  this.ssn = ssn;
+  this.course = course;
+  this.school = school;
+};
+
+Teacher.prototype = Object.create(Person.prototype);
+
+Teacher.prototype.calcAge = function () {
+  return 2037 - this.birthYear;
+};
+
+Teacher.prototype.intro = function () {
+  console.log(
+    `I'm ${this.firstName}, a teacher of ${this.course}, in the ${
+      this.school
+    }. And I'm ${this.calcAge()} years old teacher.`
+  );
+};
+
+const trNonsi = new Teacher('Nonsi', 1998, 20202, 'English', 'Suwon School');
+
+trNonsi.intro();
+
+//Animal inheritance
+//Animal inheritance
+//Animal inheritance
+
+const Animal = function (species, sound) {
+  this.species = species;
+  this.sound = sound;
+};
+
+const Dog = function (species, sound, breed) {
+  Animal.call(this, species, sound);
+  this.breed = breed;
+};
+
+Dog.prototype = Object.create(Animal);
+
+Dog.prototype.bark = function () {
+  console.log(
+    `${this.species} ${this.breed} barks: ${Array(3)
+      .fill(this.sound)
+      .join(' ')}!`
+  );
+};
+
+const bobby = new Dog('German Shepherd', 'Woof', 'Golden retriever');
+
+bobby.bark();
+
+// Athlete and football player inheritance
+// Athlete and football player inheritance
+// Athlete and football player inheritance
+
+const Athlete = function (firstName, sport) {
+  this.firstName = firstName;
+  this.sport = sport;
+};
+
+const FootballPlayer = function (firstName, sport, position) {
+  Athlete.call(this, firstName, sport);
+  this.position = position;
+};
+
+FootballPlayer.prototype = Object.create(Athlete.prototype);
+
+FootballPlayer.prototype.introduce = function () {
+  console.log(
+    `I'm ${this.firstName} and I play ${this.sport}, as a ${this.position}.`
+  );
+};
+
+const ronaldo = new FootballPlayer('CR7', 'Football', 'Forward');
+
+ronaldo.introduce();
+
+const basketballPlayer = function (firstName, sport, position, birthYear) {
+  Athlete.call(this, firstName, sport);
+  Person.call(this, firstName, birthYear);
+  this.position = position;
+  this.birthYear = birthYear;
+};
+
+basketballPlayer.prototype = Object.create(Athlete.prototype);
+Object.assign(basketballPlayer.prototype, Person.prototype);
+
+// ✅ Ensure calcAge() is available
+basketballPlayer.prototype.calcAge = Person.prototype.calcAge;
+
+basketballPlayer.prototype.introduction = function () {
+  console.log(
+    `I'm ${this.firstName} and I play ${this.sport}, as a ${
+      this.position
+    }. I'm ${this.calcAge()} old.`
+  );
+};
+
+const lebron = new basketballPlayer(
+  'Lebron James',
+  'Basketball',
+  'Center',
+  1980
+);
+
+lebron.introduction();
+
+const VolleyballPlayer = function (firstName, sport, position, birthYear) {
+  Athlete.call(this, firstName, sport);
+  Person.call(this, firstName, birthYear);
+  this.position = position;
+};
+
+VolleyballPlayer.prototype = Object.create(Athlete.prototype);
+Object.assign(VolleyballPlayer.prototype, Person.prototype);
+
+VolleyballPlayer.prototype.presentation = function () {
+  console.log(
+    `I'm ${this.firstName} and I play ${this.sport}, at ${
+      this.position
+    } position, and I'm ${this.calcAge()} years old.`
+  );
+};
+
+const volley1 = new VolleyballPlayer('Prince', 'Volleyball', 'Fixer', 2000);
+
+volley1.presentation();
+
+lebron.calcAge();
+
+// ronaldo.int();
+
+// // Bank account
+// // Bank account
+
+const BankAccount = function (owner, balance) {
+  this.owner = owner;
+  this.balance = balance;
+};
+
+const deposit = function (owner, balance, amount) {
+  BankAccount.call(this, owner, balance);
+  this.amount = amount;
+};
+
+deposit.prototype = Object.create(BankAccount);
+
+BankAccount.prototype.depositing = function (amount) {
+  this.balance = this.balance + amount;
+  console.log(
+    `${this.owner} deposited ${amount} and the new balance is ${this.balance}`
+  );
+};
+
+BankAccount.prototype.withdrawal = function (amount) {
+  this.balance = this.balance - amount;
+  console.log(
+    `${this.owner} withdrew ${amount} and the new balance is ${this.balance}`
+  );
+};
+
+const user1 = new BankAccount('Prince', 10000);
+console.log(user1);
+
+user1.depositing(2000);
+user1.withdrawal(4000);
+
+// const BankAccount = function (owner, balance) {
+//   this.owner = owner;
+//   this.balance = balance;
+// };
+
+// BankAccount.prototype.deposit = function (amount) {
+//   this.balance = this.balance + amount;
+//   console.log(
+//     `${this.owner} deposited ${amount} and the new balance is ${this.balance}`
+//   );
+// };
+
+// BankAccount.prototype.withdrawal = function (amount) {
+//   if (amount > this.balance) {
+//     console.log(`Insufficient Balance`);
+//   } else {
+//     console.log(
+//       `You withdrew ${amount}, and the balance is ${this.balance - amount}`
+//     );
+//   }
+// };
+
+// const user1 = new BankAccount('Cuthbert Prince', 1000000);
+// console.log(user1);
+
+// user1.deposit(600000);
+
+// console.log(user1);
+
+// user1.withdrawal(700000);
+
+// class expression
+// const PersonCl = class {}
+
+// Class declaration: for some leasons Jonas prefer this
+
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Method will be added to prototype property
+  calcAge() {
+    return 2037 - this.birthYear;
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    // console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+  // Static method
+  static hey() {
+    console.log(`✌️ Hey there`);
+  }
+}
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first: calling superclass
+    super(fullName, birthYear);
+    this.course = course;
+  }
+  introduce = function () {
+    console.log(`My name is ${this.fullName} and I study ${this.course}.`);
+  };
+
+  // Overriding existing calcAge in Person
+
+  calcAge() {
+    console.log(
+      `I'm ${
+        2037 - this.birthYear
+      } years old, but as a student I fell more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+// const walter = new PersonCl('Walter White', 1890);
+
+// const jessica = new PersonCl('Jessica Davids', 1996);
+// console.log(walter);
+
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+
+martha.introduce();
+
+// This will override the one in the parent class
+// This will override the one in the parent class
+martha.calcAge();
+
+// Another class example
+// Another class example
+// Another class example
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+    console.log(`Thanks for opening new Account,${owner}!`);
+  }
+
+  deposit(val) {
+    this.movements.push(val);
+  }
+  withdrawal(val) {
+    this.movements.push(-val);
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+console.log(acc1);
+
+// This is not appropriate, create a method for that
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+
+acc1.deposit(250);
+acc1.withdrawal(140);
