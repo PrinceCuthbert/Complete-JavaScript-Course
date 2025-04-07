@@ -1027,3 +1027,23 @@ console.log(acc1);
 
 acc1.deposit(250);
 acc1.withdrawal(140);
+
+// DEMO
+// DEMO
+// DEMO
+
+let text = '';
+const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+
+fruits.forEach(myFunction);
+const demo = (document.getElementById('demo').innerHTML = text);
+// demo.style.display = 'flex';
+demo.style.justifyContent = 'center';
+demo.style.marginRight = '150px';
+demo.forEach(function (value, index) {
+  value.style.color = 'white';
+});
+
+function myFunction(value, index) {
+  // text += index + ': ' + value + '<br>';
+}
