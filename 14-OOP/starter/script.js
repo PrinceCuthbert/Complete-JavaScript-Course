@@ -989,6 +989,7 @@ class StudentCl extends PersonCl {
 // console.log(walter);
 
 const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+23;
 
 martha.introduce();
 
@@ -996,54 +997,231 @@ martha.introduce();
 // This will override the one in the parent class
 martha.calcAge();
 
+console.log(`            ------------------------------            `);
+
 // Another class example
 // Another class example
 // Another class example
+
+// class Account {
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.pin = pin;
+//     this.movements = [];
+//     this.balance = 0;
+//     this.locale = navigator.language;
+//     console.log(`Thanks for opening account, dear ${this.owner}.`);
+
+//     // Automatically update time every second
+//     setInterval(this.updateTime.bind(this), 1000);
+//   }
+//   updateTime() {
+//     const date = new Date(); // Create a new date object every second
+//     return date.toLocaleString('en-US', {
+//       day: '2-digit',
+//       month: '2-digit',
+//       year: 'numeric',
+//       hour: '2-digit',
+//       minute: '2-digit',
+//       second: '2-digit',
+//       hour12: false,
+//     });
+//   }
+
+//   // Update every second
+
+//   deposit(amount) {
+//     const transactionTime = this.getCurrentTime(); // Store time at deposit
+//     this.movements.push(amount);
+//     this.transactionDates.push(transactionTime); // Store transaction date
+//     this.calcbalance(); // Automatically update balance
+
+//     console.log(`                  ---ACCOUNT STATUS---
+//       Owner: ${this.owner}
+//       Deposited: ${amount}
+//       Date:${this.updateTime()}
+//       Account Status= ${this.movements}
+//       Transaction Dates: ${this.transactionDates}
+//       New Balance: ${this.balance}`);
+//   }
+
+//   withdrawal(amount) {
+//     const transactionTime = this.getCurrentTime(); // Store time at deposit
+//     this.transactionDates.push(transactionTime); // Store transaction date
+//     this.movements.push(-amount);
+//     this.calcbalance();
+//     console.log(`                  ---ACCOUNT STATUS---
+//       Owner: ${this.owner}
+//       Withdrew: ${amount}
+//       Date:${this.updateTime()}
+//       Account Status= ${this.movements}.
+//       Transaction Dates: ${this.transactionDates}
+//       New Balance: ${this.balance}`);
+//   }
+
+//   calcbalance() {
+//     this.balance = this.movements.reduce((sum, mov) => sum + mov, 0);
+//     // console.log('New Balance:', this.balance);
+//   }
+// }
+
+// const cuth = new Account('Cuthbert', 'RWF', 1111);
+// console.log(cuth);
+
+// cuth.deposit(1000);
+// cuth.deposit(1000);
+// cuth.deposit(1000);
+// cuth.deposit(170780);
+// cuth.deposit(1700);
+// cuth.deposit(17970);
+
+// cuth.withdrawal(200);
+// cuth.calcbalance();
+
+// SE Class example
+// SE Class example
+// SE Class example
+
+// function getDiscount(age, membershipDuration) {
+//   if (age >= 60) {
+//     return 25; // 25% discount for seniors
+//   } else if (membershipDuration > 5) {
+//     return 20; // 20% discount for long-term members
+//   } else {
+//     return 0; // No discount
+//   }
+// }
+// console.log(getDiscount(60, 8));
+// console.log(getDiscount(10, 2));
+
+// // Prompt user for input
+// const readline = require('readline').createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
+
+// readline.question('Enter your age: ', age => {
+//   readline.question(
+//     'Enter your membership duration in years: ',
+//     membershipDuration => {
+//       console.log(
+//         `Your discount is: ${getDiscount(
+//           parseInt(age),
+//           parseInt(membershipDuration)
+//         )}%`
+//       );
+//       readline.close();
+//     }
+//   );
+// });
+
+// class Account {
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.pin = pin;
+//     this.movements = [];
+//     this.locale = navigator.language;
+
+//     console.log(`Thanks for opening new Account, ${owner}!`);
+//   }
+//   deposit(amount) {
+//     // Implementation for deposit method
+//     this.movements.push(amount);
+//     console.log(`Deposited: ${amount}`);
+//   }
+//   withdrawal(amount) {
+//     // Implementation for withdrawal method
+//     this.movements.push(-amount);
+//     console.log(`Withdrew: ${amount}`);
+//   }
+//   approveLoan(amount) {
+//     return true;
+//   }
+//   requestloan(amount) {
+//     if (this.approveLoan(amount)) {
+//       this.deposit(amount);
+//       console.log(`Loan approved and deposited: ${amount}`);
+//     }
+//   }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+// console.log(acc1);
+
+// acc1.deposit(250);
+// acc1.withdrawal(140);
+// acc1.requestloan(1000);
+// acc1.approveLoan(1000);
 
 class Account {
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
     this.pin = pin;
-    this.movements = [];
+    // Protected properties
+    this._movements = [];
     this.locale = navigator.language;
-    console.log(`Thanks for opening new Account,${owner}!`);
+
+    console.log(`Thanks for opening new Account, ${owner}!`);
+  }
+  getMovements() {
+    return this._movements;
   }
 
-  deposit(val) {
-    this.movements.push(val);
+  deposit(amount) {
+    // Implementation for deposit method
+    this._movements.push(amount);
+    console.log(`Deposited: ${amount}`);
   }
-  withdrawal(val) {
-    this.movements.push(-val);
+  withdrawal(amount) {
+    // Implementation for withdrawal method
+    this._movements.push(-amount);
+    console.log(`Withdrew: ${amount}`);
+  }
+  approveLoan() {
+    return true;
+  }
+  requestloan(amount) {
+    if (this.approveLoan(amount)) {
+      this.deposit(amount);
+      console.log(`Loan approved and deposited: ${amount}`);
+    }
   }
 }
 
 const acc1 = new Account('Jonas', 'EUR', 1111);
-console.log(acc1);
-
-// This is not appropriate, create a method for that
-// acc1.movements.push(250);
-// acc1.movements.push(-140);
 
 acc1.deposit(250);
 acc1.withdrawal(140);
+<<<<<<< HEAD
 
-// DEMO
-// DEMO
-// DEMO
+// // DEMO
+// // DEMO
+// // DEMO
 
-let text = '';
-const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+// let text = '';
+// const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
 
-fruits.forEach(myFunction);
-const demo = (document.getElementById('demo').innerHTML = text);
-// demo.style.display = 'flex';
-demo.style.justifyContent = 'center';
-demo.style.marginRight = '150px';
-demo.forEach(function (value, index) {
-  value.style.color = 'white';
-});
+// fruits.forEach(myFunction);
+// const demo = (document.getElementById('demo').innerHTML = text);
+// // demo.style.display = 'flex';
+// demo.style.justifyContent = 'center';
+// demo.style.marginRight = '150px';
+// demo.forEach(function (value, index) {
+//   value.style.color = 'white';
+// });
 
-function myFunction(value, index) {
-  // text += index + ': ' + value + '<br>';
-}
+// function myFunction(value, index) {
+//   // text += index + ': ' + value + '<br>';
+// }
+=======
+acc1.requestloan(1000);
+acc1.approveLoan(1000);
+acc1.getMovements();
+console.log(acc1.getMovements());
+console.log(acc1);
+
+acc1.deposit(300).deposit(500);
+>>>>>>> 678e7a8 (Encapsulation implementation and updates to script.js)

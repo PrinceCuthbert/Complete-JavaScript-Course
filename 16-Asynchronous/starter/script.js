@@ -7,7 +7,23 @@ const countriesContainer = document.querySelector('.countries');
 
 const p = document.querySelector('.test');
 
-const names = [' John Doe', ' John Brown', ' John Smith'];
+const names = [' John Doe', ' Peter Brown', ' Jonas Smith'];
+const image = ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'];
+
+let i = 0;
+const img = document.createElement('img');
+document.body.appendChild(img); // Make sure the img is added to the DOM
+
+setInterval(() => {
+  img.src = image[i]; // Update the image source
+  img.style.width = '100px';
+  img.style.height = '100px';
+  // img.style.borderRadius = '50%';
+  img.style.margin = '10px';
+  img.style.display = 'flex'; // This is how you apply styles like display
+
+  i = (i + 1) % image.length; // Cycle through images
+}, 3000); // Change every 1 second
 
 let index = 0;
 
