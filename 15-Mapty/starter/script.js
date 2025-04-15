@@ -14,10 +14,17 @@ const inputElevation = document.querySelector('.form__input--elevation');
 navigator.geolocation.getCurrentPosition(
   function (position) {
     console.log(position);
+<<<<<<< HEAD
     // const latitude = position.coords.latitude;
     // const longitude = position.coords.longitude;
     const { latitude } = position.coords;
     const { longitude } = position.coords;
+=======
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    // const { latitude } = position.coords;
+    // const { longitude } = position.coords;
+>>>>>>> 06fb143 (Update changes inside submodule)
 
     console.log(
       `https://www.google.com/maps/@${latitude},${longitude},6138m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoASAFQAw%3D%3D`
@@ -34,6 +41,7 @@ navigator.geolocation.getCurrentPosition(
       .addTo(map)
       .bindPopup('A pretty CSS popup.<br> Easily customizable.')
       .openPopup();
+<<<<<<< HEAD
     map.on('click', function (mapEvent) {
       const { lat, lng } = mapEvent.latlng;
       L.marker([lat, lng])
@@ -41,6 +49,8 @@ navigator.geolocation.getCurrentPosition(
         .bindPopup('A pretty CSS popup.<br> Easily customizable.')
         .openPopup();
     });
+=======
+>>>>>>> 06fb143 (Update changes inside submodule)
   },
   function () {
     alert('Could not get your position');
